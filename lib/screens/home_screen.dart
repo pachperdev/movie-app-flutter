@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Peliculas en Cine',
+          'Peliculas en Cines',
           style: TextStyle(
             fontSize: 20,
           ),
@@ -32,7 +32,11 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           CardSwiper(movies: moviesProvider.onDisplayMovies),
-          MovieSlider(movies: moviesProvider.popularMovies, title: 'Populares'),
+          MovieSlider(
+            movies: moviesProvider.popularMovies,
+            title: 'Populares',
+            onNextPage: () => moviesProvider.getPopularMovies(),
+          ),
         ],
       ),
     );
