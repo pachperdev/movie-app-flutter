@@ -33,9 +33,17 @@ class Movie {
   double voteAverage;
   int voteCount;
 
-  get fullPosterImg {
+  String get fullPosterImg {
     if (posterPath != null) {
       return 'https://image.tmdb.org/t/p/w500$posterPath';
+    } else {
+      return 'https://i.stack.imgur.com/GNhxO.png';
+    }
+  }
+
+  String get fullBackdropImg {
+    if (backdropPath != null) {
+      return 'https://image.tmdb.org/t/p/w500$backdropPath';
     } else {
       return 'https://i.stack.imgur.com/GNhxO.png';
     }

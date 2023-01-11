@@ -29,15 +29,18 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          CardSwiper(movies: moviesProvider.onDisplayMovies),
-          MovieSlider(
-            movies: moviesProvider.popularMovies,
-            title: 'Populares',
-            onNextPage: () => moviesProvider.getPopularMovies(),
-          ),
-        ],
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            CardSwiper(movies: moviesProvider.onDisplayMovies),
+            MovieSlider(
+              movies: moviesProvider.popularMovies,
+              title: 'Populares',
+              onNextPage: () => moviesProvider.getPopularMovies(),
+            ),
+          ],
+        ),
       ),
     );
   }

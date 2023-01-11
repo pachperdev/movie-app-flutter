@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/models/models.dart';
 import 'package:movie_app/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -6,22 +7,19 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String movie =
-        ModalRoute.of(context)?.settings.arguments.toString() ?? 'no-movie';
+    final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
+
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          const _CustomAppBar(),
+          _CustomAppBar(movie: movie),
           SliverList(
             delegate: SliverChildListDelegate(
               <Widget>[
-                const _PosterAndTitle(),
-                const _Overview(),
-                const _Overview(),
-                const _Overview(),
-                const _Overview(),
-                const CastingCards()
+                _PosterAndTitle(movie: movie),
+                _Overview(movie: movie),
+                const CastingCards(),
               ],
             ),
           )
@@ -32,7 +30,8 @@ class DetailsScreen extends StatelessWidget {
 }
 
 class _CustomAppBar extends StatelessWidget {
-  const _CustomAppBar({Key? key}) : super(key: key);
+  final Movie movie;
+  const _CustomAppBar({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +46,21 @@ class _CustomAppBar extends StatelessWidget {
         title: Container(
           width: double.infinity,
           alignment: Alignment.bottomCenter,
-          color: Colors.black12,
-          padding: const EdgeInsets.symmetric(vertical: 18),
-          child: const Text(
-            'movie.title',
-            style: TextStyle(fontSize: 18),
+          color: Colors.black38,
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: Text(
+              movie.title,
+              style: const TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
-        background: const FadeInImage(
+        background: FadeInImage(
           fit: BoxFit.cover,
-          placeholder: AssetImage('lib/assets/loading.gif'),
-          image: NetworkImage('https://via.placeholder.com/400x200'),
+          placeholder: const AssetImage('lib/assets/loading.gif'),
+          image: NetworkImage(movie.fullBackdropImg),
         ),
       ),
     );
@@ -65,10 +68,13 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _PosterAndTitle extends StatelessWidget {
-  const _PosterAndTitle({Key? key}) : super(key: key);
+  final Movie movie;
+
+  const _PosterAndTitle({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -76,39 +82,43 @@ class _PosterAndTitle extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: const FadeInImage(
+            child: FadeInImage(
               width: 110,
               height: 155,
               fit: BoxFit.cover,
-              placeholder: AssetImage('lib/assets/no-image.jpg'),
-              image: NetworkImage('https://via.placeholder.com/300x400'),
+              placeholder: const AssetImage('lib/assets/no-image.jpg'),
+              image: NetworkImage(movie.fullPosterImg),
             ),
           ),
           const SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Movie-title',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 20),
-                maxLines: 2,
-              ),
-              const Text(
-                'Movie-original-title',
-                maxLines: 1,
-              ),
-              Row(
-                children: const [
-                  Icon(
-                    Icons.star_border_outlined,
-                    color: Colors.amberAccent,
-                  ),
-                  SizedBox(width: 5),
-                  Text('Movie-voteAverage')
-                ],
-              )
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  movie.title,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 20),
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  movie.originalTitle,
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 7),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.star_border_outlined,
+                      color: Colors.amberAccent,
+                    ),
+                    const SizedBox(width: 5),
+                    Text('${movie.voteAverage}')
+                  ],
+                )
+              ],
+            ),
           )
         ],
       ),
@@ -117,15 +127,16 @@ class _PosterAndTitle extends StatelessWidget {
 }
 
 class _Overview extends StatelessWidget {
-  const _Overview({Key? key}) : super(key: key);
+  final Movie movie;
+
+  const _Overview({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: const Text(
-          textAlign: TextAlign.justify,
-          'Aliqua culpa cillum ullamco occaecat sunt officia laborum velit in elit quis minim. Sit magna nulla exercitation duis consequat aliqua cupidatat ut dolore commodo aliqua Lorem cupidatat eu. Sint cillum ex aliqua sunt. In anim incididunt laborum pariatur elit ullamco nulla proident elit tempor tempor anim duis. Amet occaecat cillum sit sit commodo laborum.'),
+      child: Text(textAlign: TextAlign.justify, movie.overview),
     );
   }
 }
