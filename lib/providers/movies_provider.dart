@@ -9,51 +9,36 @@ class MoviesProvider extends ChangeNotifier {
   final String _language = 'es-ES';
   List<Movie> onDisplayMovies = [];
   List<Movie> popularMovies = [];
+  int _popularPage = 0;
 
   MoviesProvider() {
-    // ignore: avoid_print
-    // print('MoviesProvider inicializado');
     getOnDisplayMovies();
     getPopularMovies();
   }
 
+  Future<String> _getJsonData({required String segment, int? page = 1}) async {
+    final url = Uri.https(_baseUrl, segment,
+        {'api_key': _apiKey, 'language': _language, 'page': '$page'});
+
+    final response = await http.get(url);
+    return response.body;
+  }
+
   getOnDisplayMovies() async {
-    // ignore: avoid_print
-    // print('getOnDisplayMovies');
+    final jsonData = await _getJsonData(segment: '/3/movie/now_playing');
 
-    var url = Uri.https(_baseUrl, '/3/movie/now_playing',
-        {'api_key': _apiKey, 'language': _language, 'page': '1'});
-
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      final nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
-      onDisplayMovies = nowPlayingResponse.results;
-      // ignore: avoid_print
-      // print(onDisplayMovies[0].title);
-      notifyListeners();
-    } else {
-      // ignore: avoid_print
-      print('Request failed with status: ${response.statusCode}.');
-    }
+    final nowPlayingResponse = NowPlayingResponse.fromJson(jsonData);
+    onDisplayMovies = nowPlayingResponse.results;
+    notifyListeners();
   }
 
   getPopularMovies() async {
-    // ignore: avoid_print
-    // print('getOnDisplayMovies');
+    _popularPage++;
+    final jsonData =
+        await _getJsonData(segment: '/3/movie/popular', page: _popularPage);
 
-    var url = Uri.https(_baseUrl, '/3/movie/popular',
-        {'api_key': _apiKey, 'language': _language, 'page': '1'});
-
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      final popularResponse = PopularResponse.fromJson(response.body);
-      popularMovies = [...popularMovies, ...popularResponse.results];
-      // ignore: avoid_print
-      // print(popularMovies[1].title);
-      notifyListeners();
-    } else {
-      // ignore: avoid_print
-      print('Request failed with status: ${response.statusCode}.');
-    }
+    final popularResponse = PopularResponse.fromJson(jsonData);
+    popularMovies = [...popularMovies, ...popularResponse.results];
+    notifyListeners();
   }
 }
