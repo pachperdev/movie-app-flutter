@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:movie_app/models/models.dart';
 
 class MovieSlider extends StatefulWidget {
@@ -34,7 +34,6 @@ class _MovieSliderState extends State<MovieSlider> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -55,6 +54,12 @@ class _MovieSliderState extends State<MovieSlider> {
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+            ),
+          if (widget.movies.isEmpty)
+            const SizedBox(
+              width: double.infinity,
+              height: 190,
+              child: CupertinoActivityIndicator(),
             ),
           Expanded(
             child: ListView.builder(

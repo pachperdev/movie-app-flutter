@@ -20,7 +20,7 @@ class Movie {
 
   bool adult;
   String? backdropPath;
-  List<int?> genreIds;
+  List<int> genreIds;
   int id;
   String originalLanguage;
   String originalTitle;
@@ -33,20 +33,22 @@ class Movie {
   double voteAverage;
   int voteCount;
 
-  String get fullPosterImg {
+  String? heroId;
+
+  get fullPosterImg {
     if (posterPath != null) {
       return 'https://image.tmdb.org/t/p/w500$posterPath';
-    } else {
-      return 'https://i.stack.imgur.com/GNhxO.png';
     }
+
+    return 'https://i.stack.imgur.com/GNhxO.png';
   }
 
-  String get fullBackdropImg {
+  get fullBackdropPath {
     if (backdropPath != null) {
       return 'https://image.tmdb.org/t/p/w500$backdropPath';
-    } else {
-      return 'https://i.stack.imgur.com/GNhxO.png';
     }
+
+    return 'https://i.stack.imgur.com/GNhxO.png';
   }
 
   factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
@@ -54,9 +56,7 @@ class Movie {
   factory Movie.fromMap(Map<String, dynamic> json) => Movie(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
-        genreIds: json["genre_ids"] == null
-            ? []
-            : List<int?>.from(json["genre_ids"]!.map((x) => x)),
+        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
         originalLanguage: json["original_language"],
         originalTitle: json["original_title"],

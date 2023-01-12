@@ -8,6 +8,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: CustomScrollView(
@@ -18,8 +19,11 @@ class DetailsScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               <Widget>[
                 _PosterAndTitle(movie: movie),
+                const SizedBox(height: 10),
                 _Overview(movie: movie),
-                const CastingCards(),
+                const SizedBox(height: 20),
+                CastingCards(movieId: movie.id),
+                const SizedBox(height: 230),
               ],
             ),
           )
@@ -60,7 +64,7 @@ class _CustomAppBar extends StatelessWidget {
         background: FadeInImage(
           fit: BoxFit.cover,
           placeholder: const AssetImage('lib/assets/loading.gif'),
-          image: NetworkImage(movie.fullBackdropImg),
+          image: NetworkImage(movie.fullBackdropPath),
         ),
       ),
     );
@@ -105,6 +109,13 @@ class _PosterAndTitle extends StatelessWidget {
                 Text(
                   movie.originalTitle,
                   maxLines: 2,
+                ),
+                const SizedBox(height: 3),
+                Opacity(
+                  opacity: 0.8,
+                  child: Text(
+                    'Fecha de lanzamiento: ${movie.releaseDate!}',
+                  ),
                 ),
                 const SizedBox(height: 7),
                 Row(

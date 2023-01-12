@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:movie_app/models/models.dart';
 
 class PopularResponse {

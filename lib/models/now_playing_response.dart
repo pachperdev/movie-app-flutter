@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:movie_app/models/models.dart';
+
+import 'movie.dart';
 
 class NowPlayingResponse {
   NowPlayingResponse({
@@ -10,11 +11,11 @@ class NowPlayingResponse {
     required this.totalResults,
   });
 
-  Dates? dates;
-  int? page;
+  Dates dates;
+  int page;
   List<Movie> results;
-  int? totalPages;
-  int? totalResults;
+  int totalPages;
+  int totalResults;
 
   factory NowPlayingResponse.fromJson(String str) =>
       NowPlayingResponse.fromMap(json.decode(str));
@@ -31,12 +32,12 @@ class NowPlayingResponse {
 
 class Dates {
   Dates({
-    this.maximum,
-    this.minimum,
+    required this.maximum,
+    required this.minimum,
   });
 
-  DateTime? maximum;
-  DateTime? minimum;
+  DateTime maximum;
+  DateTime minimum;
 
   factory Dates.fromJson(String str) => Dates.fromMap(json.decode(str));
 
