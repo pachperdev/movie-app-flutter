@@ -114,7 +114,7 @@ class _PosterAndTitle extends StatelessWidget {
                 Opacity(
                   opacity: 0.8,
                   child: Text(
-                    'Fecha de lanzamiento: ${movie.releaseDate!}',
+                    'Fecha de estreno: ${movie.releaseDate!}',
                   ),
                 ),
                 const SizedBox(height: 7),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_app/models/models.dart';
+import 'package:movie_app/models/top_rated_response.dart';
+import 'package:movie_app/models/upcoming_response.dart';
 
 class MoviesProvider extends ChangeNotifier {
   final String _apiKey = 'b113e1523cd29bda4970cfc13c98faf5';
@@ -8,12 +10,17 @@ class MoviesProvider extends ChangeNotifier {
   final String _language = 'es-ES';
   List<Movie> onDisplayMovies = [];
   List<Movie> popularMovies = [];
+  List<Movie> topRatedMovies = [];
+  List<Movie> upcomingMovies = [];
+
   Map<int, List<Cast>> moviesCast = {};
-  int _popularPage = 0;
+  int _countPage = 0;
 
   MoviesProvider() {
     getOnDisplayMovies();
     getPopularMovies();
+    getTopRatedMovies();
+    getUpcomingMovies();
   }
 
   Future<String> _getJsonData({required String segment, int? page = 1}) async {
@@ -33,12 +40,32 @@ class MoviesProvider extends ChangeNotifier {
   }
 
   getPopularMovies() async {
-    _popularPage++;
+    _countPage++;
     final jsonData =
-        await _getJsonData(segment: '/3/movie/popular', page: _popularPage);
+        await _getJsonData(segment: '/3/movie/popular', page: _countPage);
 
     final popularResponse = PopularResponse.fromJson(jsonData);
     popularMovies = [...popularMovies, ...popularResponse.results];
+    notifyListeners();
+  }
+
+  getTopRatedMovies() async {
+    _countPage++;
+    final jsonData =
+        await _getJsonData(segment: '/3/movie/top_rated', page: _countPage);
+
+    final topRatedResponse = TopRatedResponse.fromJson(jsonData);
+    topRatedMovies = [...topRatedMovies, ...topRatedResponse.results];
+    notifyListeners();
+  }
+
+  getUpcomingMovies() async {
+    _countPage++;
+    final jsonData =
+        await _getJsonData(segment: '/3/movie/upcoming', page: _countPage);
+
+    final upcomingResponse = UpcomingResponse.fromJson(jsonData);
+    upcomingMovies = [...upcomingMovies, ...upcomingResponse.results];
     notifyListeners();
   }
 
