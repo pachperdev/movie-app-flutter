@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_app/models/models.dart';
-import 'package:movie_app/models/top_rated_response.dart';
-import 'package:movie_app/models/upcoming_response.dart';
 
 class MoviesProvider extends ChangeNotifier {
   final String _apiKey = 'b113e1523cd29bda4970cfc13c98faf5';

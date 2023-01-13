@@ -41,7 +41,7 @@ class _MovieSliderState extends State<MovieSlider> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 255,
+      height: 260,
       //color: Colors.red,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

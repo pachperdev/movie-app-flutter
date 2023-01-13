@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/providers/movies_provider.dart';
+import 'package:movie_app/search/search_delegate.dart';
 import 'package:movie_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,8 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search_outlined),
-            onPressed: () {},
+            onPressed: () =>
+                showSearch(context: context, delegate: MovieSearchDelegate()),
           )
         ],
       ),
@@ -36,16 +38,17 @@ class HomeScreen extends StatelessWidget {
             CardSwiper(movies: moviesProvider.onDisplayMovies),
             const SizedBox(height: 10),
             MovieSlider(
-                movies: moviesProvider.upcomingMovies,
-                title: 'Próximamente en Cines',
-                onNextPage: () => moviesProvider.getUpcomingMovies()),
-            const SizedBox(height: 20),
+              movies: moviesProvider.upcomingMovies,
+              title: 'Próximamente en Cines',
+              onNextPage: () => moviesProvider.getUpcomingMovies(),
+            ),
+            const SizedBox(height: 15),
             MovieSlider(
               movies: moviesProvider.popularMovies,
               title: 'Peliculas Populares',
               onNextPage: () => moviesProvider.getPopularMovies(),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
             MovieSlider(
               movies: moviesProvider.topRatedMovies,
               title: 'Peliculas Mejor Valoradas',
