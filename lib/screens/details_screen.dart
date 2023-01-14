@@ -8,7 +8,6 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
-    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: CustomScrollView(
@@ -40,6 +39,10 @@ class _CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      leading: InkWell(
+        child: const Icon(Icons.arrow_back_ios_new_outlined),
+        onTap: () => Navigator.pop(context),
+      ),
       backgroundColor: Colors.black,
       expandedHeight: 200,
       floating: true,

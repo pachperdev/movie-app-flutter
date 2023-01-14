@@ -70,7 +70,7 @@ class _MovieSliderState extends State<MovieSlider> {
               itemBuilder: (context, index) =>
                   _MoviePoster(movie: widget.movies[index]),
             ),
-          )
+          ),
         ],
       ),
     );
