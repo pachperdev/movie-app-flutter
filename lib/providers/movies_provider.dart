@@ -14,6 +14,7 @@ class MoviesProvider extends ChangeNotifier {
   List<Movie> topRatedMovies = [];
   List<Movie> upcomingMovies = [];
   List<Movie> searchMovies = [];
+  List<Movie> recommendMovies = [];
 
   Map<int, List<Cast>> moviesCast = {};
   Map<int, List<Movie>> moviesRecommend = {};
@@ -90,7 +91,8 @@ class MoviesProvider extends ChangeNotifier {
 
     moviesRecommend[movieId] = recommendResponse.results;
 
-    return recommendResponse.results;
+    // return recommendResponse.results;
+    return recommendMovies = recommendResponse.results;
   }
 
   Future<List<Movie>> getSearchMovies(String query) async {

@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:movie_app/models/models.dart';
 import 'package:movie_app/providers/movies_provider.dart';
 import 'package:provider/provider.dart';
 
-class SliderDetails extends StatelessWidget {
+class RepartoSlider extends StatelessWidget {
   final int movieId;
   final String? title;
-  const SliderDetails({Key? key, required this.movieId, this.title})
+  const RepartoSlider({Key? key, required this.movieId, this.title})
       : super(key: key);
 
   @override
@@ -26,7 +25,7 @@ class SliderDetails extends StatelessWidget {
 
         final List<Cast> cast = snapshot.data!;
 
-        return Container(
+        return SizedBox(
           // margin: const EdgeInsets.only(bottom: 30),
           width: double.infinity,
           height: 220,

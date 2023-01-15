@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/models.dart';
+import 'package:movie_app/providers/movies_provider.dart';
 import 'package:movie_app/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key}) : super(key: key);
@@ -8,6 +10,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
+    final moviesProvider = Provider.of<MoviesProvider>(context);
 
     return Scaffold(
       body: CustomScrollView(
@@ -21,10 +24,12 @@ class DetailsScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 _Overview(movie: movie),
                 const SizedBox(height: 10),
-                SliderDetails(movieId: movie.id, title: 'Reparto Principal'),
+                RepartoSlider(movieId: movie.id, title: 'Reparto Principal'),
                 const SizedBox(height: 5),
-                SliderDetails(
-                    movieId: movie.id, title: 'Peliculas recomendadas'),
+                MovieSliderSuggestionDetails(
+                    movieId: movie.id,
+                    movies: moviesProvider.recommendMovies,
+                    title: 'Peliculas recomendadas'),
                 const SizedBox(height: 230),
               ],
             ),
