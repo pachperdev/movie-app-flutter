@@ -1,12 +1,14 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/models.dart';
 
-class MovieSliderbuildSuggestions extends StatefulWidget {
+class MovieSliderBuildSuggestions extends StatefulWidget {
   final List<Movie> movies;
   final String? title;
   final Function onNextPage;
-  const MovieSliderbuildSuggestions(
+
+  const MovieSliderBuildSuggestions(
       {Key? key,
       required this.movies,
       required this.title,
@@ -14,12 +16,12 @@ class MovieSliderbuildSuggestions extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<MovieSliderbuildSuggestions> createState() =>
-      _MovieSliderbuildSuggestionsState();
+  State<MovieSliderBuildSuggestions> createState() =>
+      _MovieSliderBuildSuggestionsState();
 }
 
-class _MovieSliderbuildSuggestionsState
-    extends State<MovieSliderbuildSuggestions> {
+class _MovieSliderBuildSuggestionsState
+    extends State<MovieSliderBuildSuggestions> {
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -81,7 +83,7 @@ class _MoviePoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
+      width: double.infinity,
       height: 110,
       color: Colors.grey.withOpacity(0.2),
       margin: const EdgeInsets.symmetric(vertical: 5),
