@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:movie_app/models/models.dart';
 import 'package:movie_app/providers/movies_provider.dart';
 import 'package:provider/provider.dart';
 
-class CastingCards extends StatelessWidget {
+class SliderDetails extends StatelessWidget {
   final int movieId;
-  const CastingCards({Key? key, required this.movieId}) : super(key: key);
+  final String? title;
+  const SliderDetails({Key? key, required this.movieId, this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class CastingCards extends StatelessWidget {
       builder: (_, AsyncSnapshot<List<Cast>> snapshot) {
         if (!snapshot.hasData) {
           return const SizedBox(
-            height: 200,
+            height: 220,
             child: CupertinoActivityIndicator(),
           );
         }
@@ -24,14 +27,31 @@ class CastingCards extends StatelessWidget {
         final List<Cast> cast = snapshot.data!;
 
         return Container(
-          margin: const EdgeInsets.only(bottom: 30),
+          // margin: const EdgeInsets.only(bottom: 30),
           width: double.infinity,
-          height: 200,
-          child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: cast.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (_, int index) => _CastCard(cast[index]),
+          height: 220,
+          // color: Colors.green,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (title != null)
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    title!,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              Expanded(
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: cast.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (_, int index) => _CastCard(cast[index]),
+                ),
+              )
+            ],
           ),
         );
       },
@@ -64,7 +84,6 @@ class _CastCard extends StatelessWidget {
             actor.name,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-            textAlign: TextAlign.center,
           ),
         ],
       ),

@@ -20,8 +20,11 @@ class DetailsScreen extends StatelessWidget {
                 _PosterAndTitle(movie: movie),
                 const SizedBox(height: 10),
                 _Overview(movie: movie),
-                const SizedBox(height: 20),
-                CastingCards(movieId: movie.id),
+                const SizedBox(height: 10),
+                SliderDetails(movieId: movie.id, title: 'Reparto Principal'),
+                const SizedBox(height: 5),
+                SliderDetails(
+                    movieId: movie.id, title: 'Peliculas recomendadas'),
                 const SizedBox(height: 230),
               ],
             ),

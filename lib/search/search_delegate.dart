@@ -36,12 +36,8 @@ class MovieSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return const Text('buildResults');
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
     final moviesProvider = Provider.of<MoviesProvider>(context);
+
     if (query.isEmpty) {
       return MovieSliderBuildSuggestions(
         movies: moviesProvider.topRatedMovies,
@@ -49,6 +45,55 @@ class MovieSearchDelegate extends SearchDelegate {
         onNextPage: () => moviesProvider.getTopRatedMovies(),
       );
     }
+
+    return FutureBuilder(
+      future: moviesProvider.getSearchMovies(query),
+      builder: (context, AsyncSnapshot<List<Movie>> snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CupertinoActivityIndicator());
+        }
+        final movies = snapshot.data!;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              height: 50,
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.only(left: 10),
+              // color: Colors.greenAccent,
+              child: Text(
+                'Principales resultados: $query',
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.only(bottom: 5),
+                physics: const BouncingScrollPhysics(),
+                itemCount: movies.length,
+                itemBuilder: (context, index) => _MovieItem(movies[index]),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final moviesProvider = Provider.of<MoviesProvider>(context);
+
+    if (query.isEmpty) {
+      return MovieSliderBuildSuggestions(
+        movies: moviesProvider.topRatedMovies,
+        title: 'Aclamadas por la critica',
+        onNextPage: () => moviesProvider.getTopRatedMovies(),
+      );
+    }
+
     return FutureBuilder(
       future: moviesProvider.getSearchMovies(query),
       builder: (context, AsyncSnapshot<List<Movie>> snapshot) {
@@ -93,8 +138,6 @@ class _MovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    movie.heroId = 'search-${movie.id}';
-
     return Container(
       width: double.infinity,
       height: 110,

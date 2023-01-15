@@ -16,6 +16,7 @@ class MoviesProvider extends ChangeNotifier {
   List<Movie> searchMovies = [];
 
   Map<int, List<Cast>> moviesCast = {};
+  Map<int, List<Movie>> moviesRecommend = {};
 
   int _countPage = 0;
 
@@ -81,6 +82,15 @@ class MoviesProvider extends ChangeNotifier {
     moviesCast[movieId] = creditsResponse.cast;
 
     return creditsResponse.cast;
+  }
+
+  Future<List<Movie>> getRecommendMovies(int movieId) async {
+    final jsonData = await _getJsonData('3/movie/$movieId/recommendations');
+    final recommendResponse = RecommendResponse.fromJson(jsonData);
+
+    moviesRecommend[movieId] = recommendResponse.results;
+
+    return recommendResponse.results;
   }
 
   Future<List<Movie>> getSearchMovies(String query) async {
