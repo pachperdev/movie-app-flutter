@@ -15,9 +15,11 @@ class MoviesProvider extends ChangeNotifier {
   List<Movie> upcomingMovies = [];
   List<Movie> searchMovies = [];
   List<Movie> recommendMovies = [];
+  List<Movie> similarMovies = [];
 
   Map<int, List<Cast>> moviesCast = {};
   Map<int, List<Movie>> moviesRecommend = {};
+  Map<int, List<Movie>> similarRecommend = {};
 
   int _countPage = 0;
 
@@ -93,6 +95,16 @@ class MoviesProvider extends ChangeNotifier {
 
     // return recommendResponse.results;
     return recommendMovies = recommendResponse.results;
+  }
+
+  Future<List<Movie>> getSimilarMovies(int movieId) async {
+    final jsonData = await _getJsonData('3/movie/$movieId/similar');
+    final similarResponse = SimilarResponse.fromJson(jsonData);
+
+    similarRecommend[movieId] = similarResponse.results;
+
+    // return recommendResponse.results;
+    return similarMovies = similarResponse.results;
   }
 
   Future<List<Movie>> getSearchMovies(String query) async {
