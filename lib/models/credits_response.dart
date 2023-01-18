@@ -59,7 +59,7 @@ class Cast {
       return 'https://image.tmdb.org/t/p/w500$profilePath';
     }
 
-    return 'https://i.stack.imgur.com/GNhxO.png';
+    return 'https://icon-library.com/images/no-user-image-icon/no-user-image-icon-3.jpg';
   }
 
   factory Cast.fromJson(String str) => Cast.fromMap(json.decode(str));

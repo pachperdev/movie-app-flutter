@@ -3,13 +3,11 @@ import 'package:movie_app/models/models.dart';
 
 class MovieSliderSuggestionDetails extends StatelessWidget {
   final String? title;
-  final List<Movie> movies;
   final Future<List<Movie>>? future;
 
   const MovieSliderSuggestionDetails({
     Key? key,
     this.title,
-    required this.movies,
     required this.future,
   }) : super(key: key);
 

@@ -27,12 +27,10 @@ class DetailsScreen extends StatelessWidget {
                 RepartoSlider(movieId: movie.id, title: 'Reparto Principal'),
                 const SizedBox(height: 5),
                 MovieSliderSuggestionDetails(
-                    movies: moviesProvider.recommendMovies,
                     future: moviesProvider.getRecommendMovies(movie.id),
                     title: 'Peliculas recomendadas'),
                 const SizedBox(height: 10),
                 MovieSliderSuggestionDetails(
-                    movies: moviesProvider.recommendMovies,
                     future: moviesProvider.getSimilarMovies(movie.id),
                     title: 'Peliculas similares'),
                 const SizedBox(height: 230),

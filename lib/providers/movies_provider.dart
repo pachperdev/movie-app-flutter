@@ -13,9 +13,6 @@ class MoviesProvider extends ChangeNotifier {
   List<Movie> popularMovies = [];
   List<Movie> topRatedMovies = [];
   List<Movie> upcomingMovies = [];
-  List<Movie> searchMovies = [];
-  List<Movie> recommendMovies = [];
-  List<Movie> similarMovies = [];
 
   Map<int, List<Cast>> moviesCast = {};
   Map<int, List<Movie>> moviesRecommend = {};
@@ -88,23 +85,27 @@ class MoviesProvider extends ChangeNotifier {
   }
 
   Future<List<Movie>> getRecommendMovies(int movieId) async {
+    if (moviesRecommend.containsKey(movieId)) return moviesRecommend[movieId]!;
+
     final jsonData = await _getJsonData('3/movie/$movieId/recommendations');
     final recommendResponse = RecommendResponse.fromJson(jsonData);
 
     moviesRecommend[movieId] = recommendResponse.results;
 
-    // return recommendResponse.results;
-    return recommendMovies = recommendResponse.results;
+    return recommendResponse.results;
   }
 
   Future<List<Movie>> getSimilarMovies(int movieId) async {
+    if (similarRecommend.containsKey(movieId)) {
+      return similarRecommend[movieId]!;
+    }
+
     final jsonData = await _getJsonData('3/movie/$movieId/similar');
     final similarResponse = SimilarResponse.fromJson(jsonData);
 
     similarRecommend[movieId] = similarResponse.results;
 
-    // return recommendResponse.results;
-    return similarMovies = similarResponse.results;
+    return similarResponse.results;
   }
 
   Future<List<Movie>> getSearchMovies(String query) async {
