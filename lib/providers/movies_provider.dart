@@ -31,7 +31,6 @@ class MoviesProvider extends ChangeNotifier {
     final url = Uri.https(_baseUrl, endpoint,
         {'api_key': _apiKey, 'language': _language, 'page': '$page'});
 
-    // Await the http get response, then decode the json-formatted response.
     final response = await http.get(url);
     return response.body;
   }

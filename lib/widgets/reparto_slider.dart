@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:movie_app/models/models.dart';
 import 'package:movie_app/providers/movies_provider.dart';
 import 'package:provider/provider.dart';
@@ -72,14 +73,67 @@ class _CastCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: FadeInImage(
-                width: 110,
-                height: 155,
-                fit: BoxFit.cover,
-                placeholder: const AssetImage('lib/assets/no-image.jpg'),
-                image: NetworkImage(cast.fullProfilePath)),
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    title: Center(child: Text(cast.name)),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: FadeInImage(
+                            width: 250,
+                            height: 350,
+                            fit: BoxFit.cover,
+                            placeholder:
+                                const AssetImage('lib/assets/no-image.jpg'),
+                            image: NetworkImage(cast.fullProfilePath),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Column(
+                          children: [
+                            const Text('Popularidad: '),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.star_border_outlined,
+                                  color: Colors.amberAccent,
+                                ),
+                                const SizedBox(width: 3),
+                                Text('${cast.popularity} %'),
+                                const SizedBox(width: 3),
+                                const Icon(
+                                  Icons.star_border_outlined,
+                                  color: Colors.amberAccent,
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: FadeInImage(
+                  width: 110,
+                  height: 155,
+                  fit: BoxFit.cover,
+                  placeholder: const AssetImage('lib/assets/no-image.jpg'),
+                  image: NetworkImage(cast.fullProfilePath)),
+            ),
           ),
           Text(
             cast.name,
