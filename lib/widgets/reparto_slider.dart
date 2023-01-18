@@ -24,43 +24,45 @@ class RepartoSlider extends StatelessWidget {
         }
 
         final List<Cast> cast = snapshot.data!;
-
-        return SizedBox(
-          // margin: const EdgeInsets.only(bottom: 30),
-          width: double.infinity,
-          height: 220,
-          // color: Colors.green,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (title != null)
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    title!,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+        if (cast.isNotEmpty) {
+          return SizedBox(
+            // margin: const EdgeInsets.only(bottom: 30),
+            width: double.infinity,
+            height: 220,
+            // color: Colors.green,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (title != null)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      title!,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-              Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: cast.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (_, int index) => _CastCard(cast[index]),
-                ),
-              )
-            ],
-          ),
-        );
+                Expanded(
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: cast.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, int index) => _CastCard(cast[index]),
+                  ),
+                )
+              ],
+            ),
+          );
+        }
+        return const SizedBox();
       },
     );
   }
 }
 
 class _CastCard extends StatelessWidget {
-  final Cast actor;
-  const _CastCard(this.actor);
+  final Cast cast;
+  const _CastCard(this.cast);
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +79,10 @@ class _CastCard extends StatelessWidget {
                 height: 155,
                 fit: BoxFit.cover,
                 placeholder: const AssetImage('lib/assets/no-image.jpg'),
-                image: NetworkImage(actor.fullProfilePath)),
+                image: NetworkImage(cast.fullProfilePath)),
           ),
           Text(
-            actor.name,
+            cast.name,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
           ),
