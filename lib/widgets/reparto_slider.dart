@@ -83,43 +83,46 @@ class _CastCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     title: Center(child: Text(cast.name)),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: FadeInImage(
-                            width: 250,
-                            height: 350,
-                            fit: BoxFit.cover,
-                            placeholder:
-                                const AssetImage('lib/assets/no-image.jpg'),
-                            image: NetworkImage(cast.fullProfilePath),
+                    content: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: FadeInImage(
+                              width: 250,
+                              height: 350,
+                              fit: BoxFit.cover,
+                              placeholder:
+                                  const AssetImage('lib/assets/no-image.jpg'),
+                              image: NetworkImage(cast.fullProfilePath),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 10),
-                        Column(
-                          children: [
-                            const Text('Popularidad: '),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.star_border_outlined,
-                                  color: Colors.amberAccent,
-                                ),
-                                const SizedBox(width: 3),
-                                Text('${cast.popularity} %'),
-                                const SizedBox(width: 3),
-                                const Icon(
-                                  Icons.star_border_outlined,
-                                  color: Colors.amberAccent,
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
+                          const SizedBox(height: 10),
+                          Column(
+                            children: [
+                              const Text('Popularidad: '),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.star_border_outlined,
+                                    color: Colors.amberAccent,
+                                  ),
+                                  const SizedBox(width: 3),
+                                  Text('${cast.popularity} %'),
+                                  const SizedBox(width: 3),
+                                  const Icon(
+                                    Icons.star_border_outlined,
+                                    color: Colors.amberAccent,
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   );
                 },
