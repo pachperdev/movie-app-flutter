@@ -39,6 +39,7 @@ class DetailsScreen extends StatelessWidget {
           )
         ],
       ),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }
@@ -51,9 +52,8 @@ class _CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       leading: InkWell(
-        child: const Icon(Icons.arrow_back_ios_new_outlined),
-        onTap: () => Navigator.pop(context),
-      ),
+          child: const Icon(Icons.arrow_back_ios_new_outlined),
+          onTap: () => Navigator.pop(context)),
       backgroundColor: Colors.black,
       expandedHeight: 200,
       floating: true,

@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'home': (context) => const HomeScreen(),
         'details': (context) => const DetailsScreen(),
+        'profile': (context) => const ProfileScreen(),
       },
       theme: ThemeData.dark().copyWith(
         // AppBar Theme App
