@@ -41,7 +41,7 @@ class _MovieSliderState extends State<MovieSlider> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 260,
+      height: 283,
       //color: Colors.red,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +58,7 @@ class _MovieSliderState extends State<MovieSlider> {
           if (widget.movies.isEmpty)
             const SizedBox(
               width: double.infinity,
-              height: 190,
+              height: 270,
               child: CupertinoActivityIndicator(),
             ),
           Expanded(
@@ -87,10 +87,11 @@ class _MoviePoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 130,
-      height: 190,
+      height: double.infinity,
       //color: Colors.green,
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           GestureDetector(
             onTap: () =>

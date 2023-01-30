@@ -29,7 +29,7 @@ class DetailsScreen extends StatelessWidget {
                 MovieSliderSuggestionDetails(
                     future: moviesProvider.getRecommendMovies(movie.id),
                     title: 'Peliculas recomendadas'),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 MovieSliderSuggestionDetails(
                     future: moviesProvider.getSimilarMovies(movie.id),
                     title: 'Peliculas similares'),

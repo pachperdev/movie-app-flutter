@@ -31,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 const Text(
                   "Mauricio Pacheco",
-                  style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 10),
@@ -46,14 +46,12 @@ class ProfileScreen extends StatelessWidget {
                       text: "GitHub",
                       url: Uri.parse('https://github.com/pachperdev'),
                     ),
-                    const SizedBox(height: 10),
                     _CustomElevatedButton(
                       icon: FontAwesomeIcons.linkedin,
                       colors: Colors.blueGrey,
                       text: "LinkedIn",
                       url: Uri.parse('https://www.linkedin.com/in/pachperdev/'),
                     ),
-                    const SizedBox(height: 10),
                     _CustomElevatedButton(
                       icon: FontAwesomeIcons.instagram,
                       colors: Colors.pinkAccent,
@@ -110,7 +108,7 @@ class _CustomElevatedButton extends StatelessWidget {
         ),
         backgroundColor: MaterialStateProperty.all<Color>(colors),
         padding: MaterialStateProperty.all(
-          const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
         ),
       ),
       label: Text(
