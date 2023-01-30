@@ -29,7 +29,7 @@ class RepartoSlider extends StatelessWidget {
           return SizedBox(
             // margin: const EdgeInsets.only(bottom: 30),
             width: double.infinity,
-            height: 220,
+            height: 245,
             // color: Colors.green,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

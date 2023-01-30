@@ -84,7 +84,7 @@ class _MoviePoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 110,
+      height: 145,
       color: Colors.grey.withOpacity(0.2),
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: GestureDetector(
@@ -95,7 +95,7 @@ class _MoviePoster extends StatelessWidget {
               borderRadius: BorderRadius.circular(3),
               child: FadeInImage(
                 width: 150,
-                height: 110,
+                height: 145,
                 fit: BoxFit.cover,
                 placeholder: const AssetImage('lib/assets/no-image.jpg'),
                 image: NetworkImage(movie.fullBackdropPath),
