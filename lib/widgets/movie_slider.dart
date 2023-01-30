@@ -58,7 +58,7 @@ class _MovieSliderState extends State<MovieSlider> {
           if (widget.movies.isEmpty)
             const SizedBox(
               width: double.infinity,
-              height: 270,
+              height: 200,
               child: CupertinoActivityIndicator(),
             ),
           Expanded(
