@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Peliculas en Cines ahora',
+          'Peliculas en Cines',
           style: TextStyle(
             fontSize: 20,
           ),
